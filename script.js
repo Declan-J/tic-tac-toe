@@ -55,15 +55,39 @@ function createPlayer(initialName = String, playerToken) {
 }
 
 const gameState = (() => {
+    /*
+    This is used to control the state of the game, and handles the game's logic.
+    Inside the state, we manipulate the board, place down tokens and switch turns.
+    */
+
+    //First we create a gameboard, by default I'm creating a 3x3 grid.
     gameBoard.createBoard(3, 3);
+
+    //Add some players
     const player1 = createPlayer("Dec", "X");
     const player2 = createPlayer("John Toe", "O");
-
-    //who's go is it?
+    
+    
     //place a counter down (current player)
+    
+    //re-print board
+
     //check if there's a winner
     
-    //repeat until winner
+    //swap player
+    let currentPlayer = player1;
+    //Handles switching between player.
+    function switchPlayer(player) {
+        if (player === player1) {
+            currentPlayer = player2;
+            console.log("It's player 2's turn next.")
+        }
+        else if (player === player2) {
+            currentPlayer = player1; 
+            console.log("Time to go, player 1.") 
+        }
+    }
+    // (repeat until winner)
 
     //return { player1, player2 }
 })();

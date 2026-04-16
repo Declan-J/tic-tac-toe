@@ -3,8 +3,13 @@
 function Cell() {
     let value = 0;
 
-    const getValue = () => value;
-    const setToken = (token) => { value = token};
+    const getValue = () => {
+        return value;
+    };
+    const setToken = (token) => {
+        value = token;
+    };
+
     return { getValue, setToken }
 }
 
@@ -23,22 +28,51 @@ const gameBoard = (() => {
         return board;
     };
 
-    const getBoard = () => board;
+    const getBoard = () => {
+        return board;
+    };
 
     return { createBoard, getBoard }
 })();
 
-function createPlayer(playerName = String, playerToken) {
-    const name = playerName, token = playerToken;
-    return { name, token }
+function createPlayer(initialName = String, playerToken) {
+    let name = initialName;
+    const token = playerToken;
+
+    const setName = (newName) => {
+        name = newName
+    };
+
+    const getName = () => {
+        return name;
+    };
+
+    const getToken = () => {
+        return token;
+    };
+
+    return { getName, setName, getToken }
 }
 
 const gameState = (() => {
-    const myGame = gameBoard.createBoard(3, 3);
+    gameBoard.createBoard(3, 3);
     const player1 = createPlayer("Dec", "X");
     const player2 = createPlayer("John Toe", "O");
 
-    console.log(`Welcome to Tic Tac Toe!\n You're going first ${player1.name}, using the ${player1.token} token! \n And ${player2.name} is up next, with the ${player2.token} token.`)
+    //who's go is it?
+    //place a counter down (current player)
+    //check if there's a winner
+    
+    //repeat until winner
 
-    return { myGame, player1, player2 }
+    //return { player1, player2 }
 })();
+
+// 
+
+/*
+Current Task:
+Focus on getting a working game in the console first. Make sure you include logic that checks for when the game is over! You should be checking for all winning 3-in-a-rows and ties.
+
+Call functions and pass arguments to them to play the game yourself and check if everything is working as intended.
+*/

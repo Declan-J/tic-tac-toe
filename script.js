@@ -35,7 +35,7 @@ const gameBoard = (() => {
     return { createBoard, getBoard }
 })();
 
-function createPlayer(initialName = String, playerToken) {
+function createPlayer(initialName = "Guest", playerToken) {
     let name = initialName;
     const tokenValue = (playerToken === "X") ? 1 : 2;
 
@@ -97,15 +97,9 @@ const gameState = (() => {
 
     //swap player
     //Handles switching between player.
-    function switchPlayer(player) {
-        if (player === player1) {
-            currentPlayer = player2;
-            console.log("It's player 2's turn next.")
-        }
-        else if (player === player2) {
-            currentPlayer = player1;
-            console.log("Time to go, player 1.")
-        }
+    function switchPlayer() {  
+        currentPlayer = (currentPlayer === player1) ? player2 : player1;
+        console.log(`It's now ${currentPlayer.getName()}'s turn.`);
     }
     // (repeat until winner)
 

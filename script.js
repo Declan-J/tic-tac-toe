@@ -22,7 +22,7 @@ const gameBoard = (() => {
             board[i] = [];
             for (let j = 0; j < columns; j++) {
                 board[i].push(Cell())
-                console.log(`cell added at row ${i}, column ${j}`);
+                // console.log(`cell added at row ${i}, column ${j}`);
             }
         }
         return board;
@@ -37,7 +37,7 @@ const gameBoard = (() => {
 
 function createPlayer(initialName = String, playerToken) {
     let name = initialName;
-    const token = playerToken;
+    const tokenValue = (playerToken === "X") ? 1 : 2;
 
     const setName = (newName) => {
         name = newName
@@ -48,7 +48,7 @@ function createPlayer(initialName = String, playerToken) {
     };
 
     const getToken = () => {
-        return token;
+        return tokenValue;
     };
 
     return { getName, setName, getToken }
@@ -60,22 +60,42 @@ const gameState = (() => {
     Inside the state, we manipulate the board, place down tokens and switch turns.
     */
 
-    //First we create a gameboard, by default I'm creating a 3x3 grid.
+    //First we create a game board. By default we create a 3x3 grid.
     gameBoard.createBoard(3, 3);
 
     //Add some players
     const player1 = createPlayer("Dec", "X");
     const player2 = createPlayer("John Toe", "O");
-    
-    
-    //place a counter down (current player)
-    
+
+    //Set the current player. This changes every time a move is made.
+    let currentPlayer = player1;
+
+    //Updates the board with played token.
+    function placeToken(row, column) {
+        const board = gameBoard.getBoard()
+        const target = board[row][column];
+        if (target.getValue() === 0) {
+            console.log(`Setting ${currentPlayer.getName()}'s token.`)
+            target.setToken(currentPlayer.getToken());
+        }
+        else {
+            console.log("Space Occupied");
+            return;
+        }
+    }
+
     //re-print board
+    //debugging: print board with values
+    function printBoard() {
+        const board = gameBoard.getBoard();
+        const boardWithValues = board.map((row) => row.map((cell) => cell.getValue()));
+
+        console.table(boardWithValues);
+    }
 
     //check if there's a winner
-    
+
     //swap player
-    let currentPlayer = player1;
     //Handles switching between player.
     function switchPlayer(player) {
         if (player === player1) {
@@ -83,11 +103,19 @@ const gameState = (() => {
             console.log("It's player 2's turn next.")
         }
         else if (player === player2) {
-            currentPlayer = player1; 
-            console.log("Time to go, player 1.") 
+            currentPlayer = player1;
+            console.log("Time to go, player 1.")
         }
     }
     // (repeat until winner)
+
+    placeToken(0, 0);
+    printBoard();
+    switchPlayer(currentPlayer);
+    placeToken(0, 0);
+    printBoard();
+    placeToken(1, 0);
+    printBoard();
 
     //return { player1, player2 }
 })();

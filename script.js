@@ -94,22 +94,54 @@ const gameState = (() => {
     }
 
     //check if there's a winner
+    function checkWinner() {
+        //get board
+        const board = gameBoard.getBoard();
+
+        //turn rows, columns and diagonals into arrays
+
+        let row1 = [], row2 = [], row3 = [];
+        row1 = board[0].map((cell => cell.getValue())),
+            row2 = board[1].map((cell => cell.getValue())),
+            row3 = board[2].map((cell => cell.getValue()));
+        console.log(row1, row2, row3);
+
+        let column1 = [], column2 = [], column3 = [];
+        for (let i = 0; i < 3; i++) {
+            column1.push(board[i][0].getValue());
+            column2.push(board[i][1].getValue());
+            column3.push(board[i][2].getValue());
+        }
+        console.log(column1, column2, column3);
+
+
+        // //check all rows match
+        // if (board[0][0].getValue() === 1 && board[0][1].getValue() === 1 && board[0][2].getValue() === 1) {
+        //     return console.log(`${player1.getName()} is the winner!`);
+        // }
+        // else if (board[1][0].getValue() === 1 && board[1][1].getValue() === 1 && board[1][2].getValue() === 1) {
+        //     return console.log(`${player1.getName()} is the winner!`);
+        // }
+        // else if (board[2][0].getValue() === 1 && board[2][1].getValue() === 1 && board[2][2].getValue() === 1) {
+        //     return console.log(`${player1.getName()} is the winner!`);
+        // }
+    }
 
     //swap player
     //Handles switching between player.
-    function switchPlayer() {  
+    function switchPlayer() {
         currentPlayer = (currentPlayer === player1) ? player2 : player1;
         console.log(`It's now ${currentPlayer.getName()}'s turn.`);
     }
     // (repeat until winner)
 
-    placeToken(0, 0);
-    printBoard();
-    switchPlayer(currentPlayer);
-    placeToken(0, 0);
-    printBoard();
+    placeToken(0, 1);
     placeToken(1, 0);
+    placeToken(1, 1);
+    placeToken(1, 2);
+    placeToken(2, 2);
     printBoard();
+    checkWinner();
 
     //return { player1, player2 }
 })();

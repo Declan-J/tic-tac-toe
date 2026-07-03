@@ -101,8 +101,10 @@ const gameState = (() => {
             row3 = board[2].map((cell => cell.getValue()));
 
         const allRows = [row1, row2, row3];
-        console.log("rows")
-        console.log(row1, row2, row3);
+
+        //Test log for rows
+        // console.log("rows")
+        // console.log(row1, row2, row3);
 
         let column1 = [], column2 = [], column3 = [];
         for (let i = 0; i < 3; i++) {
@@ -110,14 +112,18 @@ const gameState = (() => {
             column2.push(board[i][1].getValue());
             column3.push(board[i][2].getValue());
         }
-        console.log("columns")
-        console.log(column1, column2, column3);
+
+        //Test log for columns
+        // console.log("columns")
+        // console.log(column1, column2, column3);
 
         let diagonals1 = [], diagonals2 = [];
         diagonals1.push(board[0][0].getValue(), board[1][1].getValue(), board[2][2].getValue())
         diagonals2.push(board[2][0].getValue(), board[1][1].getValue(), board[0][2].getValue())
-        console.log("diag")
-        console.log(diagonals1, diagonals2)
+
+        //Test log for diag
+        // console.log("diag")
+        // console.log(diagonals1, diagonals2)
 
         //put all lines into an array to check for win/draw.
         const allLines = [row1, row2, row3, column1, column2, column3, diagonals1, diagonals2];
@@ -137,6 +143,10 @@ const gameState = (() => {
             console.log(`It's a draw!`)
             return;
         }
+
+        else {
+            console.log(`No winner yet, keep going...`)
+        }
     }
 
     //Handles switching between player.
@@ -145,14 +155,71 @@ const gameState = (() => {
         console.log(`It's now ${currentPlayer.getName()}'s turn.`);
     }
 
-    placeToken(0, 1);
-    placeToken(1, 0);
-    placeToken(1, 1);
-    switchPlayer();
-    placeToken(1, 2);
-    placeToken(2, 2);
-    placeToken(0, 2);
-    printBoard();
+    //Game Loop example
+    // placeToken(0,0);
+    // printBoard();
+    // checkWinner();
+    // switchPlayer();
+
+    //Test for draw with regular gameplay loop.
+
+    //    const testForDraw = (() => {
+
+    //     // O
+    //     placeToken(0, 1);
+    //     printBoard();
+    //     checkWinner();
+    //     switchPlayer();
+
+    //     // X
+    //     placeToken(2, 1);
+    //     printBoard();
+    //     checkWinner();
+    //     switchPlayer();
+
+    //     // O
+    //     placeToken(1, 1);
+    //     printBoard();
+    //     checkWinner();
+    //     switchPlayer();
+
+    //     // X
+    //     placeToken(0, 0);
+    //     printBoard();
+    //     checkWinner();
+    //     switchPlayer();
+
+    //     // O
+    //     placeToken(2, 0);
+    //     printBoard();
+    //     checkWinner();
+    //     switchPlayer();
+
+    //     // X
+    //     placeToken(0, 2);
+    //     printBoard();
+    //     checkWinner();
+    //     switchPlayer();
+
+    //     //O
+    //     placeToken(2, 2);
+    //     printBoard();
+    //     checkWinner();
+    //     switchPlayer();
+
+    //     // X
+    //     placeToken(1, 2);
+    //     printBoard();
+    //     checkWinner();
+    //     switchPlayer();
+
+    //     //O
+    //     placeToken(1, 0);
+    //     printBoard();
+    //     checkWinner();
+    //     // switchPlayer();
+    //     })();
+
 
 })();
 
